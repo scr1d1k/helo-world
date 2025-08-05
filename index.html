@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме — Азяков Антон</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* Green */
+            --secondary-color: #2196F3; /* Blue */
+            --background-dark: #121212; /* Dark background */
+            --surface-dark: #1E1E1E; /* Slightly lighter dark for cards */
+            --text-color-light: #E0E0E0; /* Light grey text */
+            --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-dark);
+            color: var(--text-color-light);
+            line-height: 1.7;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for better scrolling */
+            min-height: 100vh; /* Ensure it takes full viewport height */
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 40px 20px; /* Add some margin on sides for smaller screens */
+            text-align: left;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            animation: fadeIn 1s ease-in-out; /* Fade-in animation for header */
+        }
+
+        h1 {
+            font-size: 3.5rem; /* Larger main title */
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 2px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for depth */
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin: 5px 0 0;
+            color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+        }
+
+        .content-section {
+            background-color: var(--surface-dark);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+        h3 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 600;
+            border-bottom: 3px solid var(--secondary-color); /* Underline effect */
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: inline-block; /* Ensures border only covers text width */
+        }
+        
+        ul {
+            list-style-type: none; /* Remove default bullet points */
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: flex;
+            flex-direction: column; /* Stack content vertically */
+            background-color: #2a2a2a; /* Slightly darker background for list items */
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        li:hover {
+            background-color: #333333; /* Darker on hover */
+            transform: scale(1.01); /* Slight grow effect */
+        }
+
+        li strong {
+            color: var(--primary-color); /* Highlight strong text */
+            font-weight: 600;
+            font-size: 1.1rem; /* Slightly larger font for titles */
+            margin-bottom: 5px; /* Space between title and description */
+            display: block; /* Ensure strong takes full width */
+        }
+
+        li span {
+            color: var(--text-color-light);
+            font-size: 1rem;
+        }
+
+        li::before {
+            content: '✨'; /* Custom bullet point emoji for more flair */
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            align-self: flex-start; /* Align emoji to the start */
+            margin-bottom: 5px; /* Space between emoji and text */
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .spoiler {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px; /* Pill-shaped button */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .spoiler:hover {
+            background-color: #43A047; /* Darker green on hover */
+            transform: translateY(-3px); /* Lift effect on hover */
+        }
+        
+        .resume-content {
+            display: none; /* Hidden by default */
+            margin-top: 30px;
+            animation: slideDown 0.5s ease-out forwards; /* Slide down animation */
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 1.4rem;
+            }
+            h3 {
+                font-size: 1.6rem;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            .spoiler {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+            li {
+                padding: 12px 15px;
+            }
+            li strong {
+                font-size: 1rem;
+            }
+            li span {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            h3 {
+                font-size: 1.4rem;
+            }
+            .content-section {
+                padding: 15px;
+            }
+            li {
+                padding: 10px 12px;
+            }
+            li strong {
+                font-size: 0.95rem;
+            }
+            li span {
+                font-size: 0.85rem;
+            }
+            li::before {
+                font-size: 1rem;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Hello World!</h1>
+            <h2>Азяков Антон</h2>
+        </header>
+        
+        <div class="content-section">
+            <h3>Обо мне</h3>
+            <p>
+               Я — Антон Азяков, начинающий специалист в IT. Хотя у меня пока нет опыта, я активно изучаю технологии, включая Python, разработку ботов с ИИ и системное администрирование. Уверен, что с готовностью учиться и развиваться, смогу быстро освоить новые навыки и стать ценным специалистом.
+            </p>
+        </div>
+
+        <div class="button-container">
+            <button class="spoiler" onclick="toggleResume()">Показать резюме</button>
+        </div>
+
+        <div class="resume-content" id="resume">
+            <div class="content-section">
+                <h3>Ключевые навыки</h3>
+                <ul>
+                    <li>
+                        <strong>Программирование:</strong> 
+                        <span>Python (включая использование ИИ для создания ботов)</span>
+                    </li>
+                    <li>
+                        <strong>Разработка веб-сайтов:</strong> 
+                        <span>опыт работы с платформами Reg.ru, Битрикс24, Ябизнес, Тильда</span>
+                    </li>
+                    <li>
+                        <strong>Искусственный интеллект:</strong> 
+                        <span>создание бота-таролога с ИИ и системой оплаты через Юкасса</span>
+                    </li>
+                    <li>
+                        <strong>Базы данных:</strong> 
+                        <span>работа с базой данных для бота, обработка данных</span>
+                    </li>
+                    <li>
+                        <strong>Системное администрирование:</strong> 
+                        <span>опыт запуска и поддержки игровых серверов</span>
+                    </li>
+                    <li>
+                        <strong>Графика:</strong> 
+                        <span>Photoshop и Illustrator</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h3>Проекты</h3>
+                <ul>
+                    <li>
+                        <strong>Таролог-бот с ИИ (Telegram):</strong> 
+                        <span>Создал бота с ИИ для ответов на запросы и системой оплаты через Юкасса.</span>
+                    </li>
+                    <li>
+                        <strong>Веб-сайты (Reg.ru, Тильда):</strong> 
+                        <span>Создание и запуск веб-сайтов на различных платформах.</span>
+                    </li>
+                    <li>
+                        <strong>Небольшие калькуляторы и утилиты:</strong> 
+                        <span>Разработка приложений для автоматизации процессов.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h3>Образование</h3>
+                <ul>
+                    <li>
+                        <strong>Самообразование в области ИТ и ИИ:</strong> 
+                        <span>освоение программирования, ИИ, работы с базами данных.</span>
+                    </li>
+                    <li>
+                        <strong>Курсы:</strong> 
+                        <span>Python, ИИ (практический опыт)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h3>Опыт работы</h3>
+                <ul>
+                    <li>
+                        <strong>Руководитель в строительном бизнесе:</strong> 
+                        <span>более 3 лет. Руководил командой и координировал проекты.</span>
+                    </li>
+                    <li>
+                        <strong>Опыт в системном администрировании:</strong> 
+                        <span>настройка и администрирование серверов для игр.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h3>Дополнительная информация</h3>
+                <ul>
+                    <li>
+                        <strong>Языки:</strong> 
+                        <span>Английский</span>
+                    </li>
+                    <li>
+                        <strong>Личное развитие:</strong> 
+                        <span>постоянно развиваюсь в области IT, изучаю новые технологии.</span>
+                    </li>
+                </ul>
+            </div >
+            
+            <div class="content-section">
+                <h3>Желаемая позиция</h3>
+                <p>Я открыт для предложений на позиции в сфере IT с возможностью роста и обучения.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 | Азяков Антон</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleResume() {
+            var resumeContent = document.getElementById("resume");
+            var button = document.querySelector(".spoiler");
+            // Toggle display style
+            if (resumeContent.style.display === "none" || resumeContent.style.display === "") {
+                resumeContent.style.display = "block";
+                button.textContent = "Скрыть резюме"; // Change button text
+            } else {
+                resumeContent.style.display = "none";
+                button.textContent = "Показать резюме"; // Change button text back
+            }
+        }
+    </script>
+
+</body>
+</html>
